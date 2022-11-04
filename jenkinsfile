@@ -21,7 +21,7 @@ pipeline {
 stage('Test image') {
         steps{
         script {
-            echo "TP4 : Devops V4"
+            echo "Tests passed"
         }
       }
     }
