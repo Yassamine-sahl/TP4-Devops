@@ -21,22 +21,18 @@ pipeline {
 stage('Test image') {
         steps{
         script {
-                    echo "Tests passed"
+        
+            echo "Tests passed"
         }
       }
     }
-    stage('Publish Image') {
+    stage('Deploy Image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
-      }
-    }
-     stage('Deploy image') {
-      steps{
-        bat "docker run -d $registry:$BUILD_NUMBER"
       }
     }
   }
