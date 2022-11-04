@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git ' https://github.com/Yassamine-sahl/TP4-Devops'
+        git 'https://github.com/Yassamine-sahl/TP4-Devops'
       }
     }
     stage('Building image') {
@@ -21,11 +21,11 @@ pipeline {
 stage('Test image') {
         steps{
         script {
-            echo "Tests passed"
+                    echo "Tests passed"
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Publish Image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -34,5 +34,11 @@ stage('Test image') {
         }
       }
     }
+        stage('Deploy image') {
+      steps{
+        bat "docker run -d $registry:$BUILD_NUMBER"
+      }
+    }
   }
 }
+
